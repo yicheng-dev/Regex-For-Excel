@@ -7,14 +7,14 @@ public class RegexChecker {
     private final static String integerRegExp = "[+-]?[0-9]+";
     private final static String doubleRegExp = "[+-]?([0-9]*\\.[0-9]+|[0-9]+\\.[0-9]*)|[+-]?([0-9]*\\.?[0-9]+|[0-9]+\\.?[0-9]*)[Ee][+-]?[0-9]+";
     private final static String cellRegExp = "[+-]?[A-Z]+[0-9]+";
-    private final static String specialFormulaRegExp = "(MIN|MAX|AVERAGE|SUM|COUNT)\\(" + "(" + integerRegExp + "|" + doubleRegExp + "|" + cellRegExp + ")"
+    private final static String specialFormulaRegExp = "[+-]?(MIN|MAX|AVERAGE|SUM|COUNT)\\(" + "(" + integerRegExp + "|" + doubleRegExp + "|" + cellRegExp + ")"
             + "(" + "[,:]" + "(" + integerRegExp + "|" + doubleRegExp + "|" + cellRegExp + "))*" + "\\)";
 
     private String str;
     private boolean isValidFormula;
 
     public RegexChecker(String str){
-        this.str = str;
+        this.str = str.replaceAll("\\s+", "");
         if (str.charAt(0) != '=' || str.length() <= 1)
             isValidFormula = false;
         else
