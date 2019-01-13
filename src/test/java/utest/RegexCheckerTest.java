@@ -2,20 +2,21 @@ package utest;
 
 import org.junit.Assert;
 import org.junit.Test;
-import regex.Regex;
+import regex.RegexChecker;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class RegexTest {
+public class RegexCheckerTest {
 
     private int getRegexResult(String str){
-        if (Regex.isProbInt(str))
+        RegexChecker regexChecker = new RegexChecker(str);
+        if (regexChecker.isProbInt())
             return 0;
-        if (Regex.isProbDouble(str))
+        if (regexChecker.isProbDouble())
             return 1;
-        if (Regex.isProbFormula(str))
+        if (regexChecker.isProbFormula())
             return 2;
         return 3;
     }
@@ -34,7 +35,7 @@ public class RegexTest {
                 try{
                     Assert.assertEquals(getRegexResult(inputStr), Integer.parseInt(answerStr));
                 }catch (AssertionError error){
-                    System.out.println(inputStr + " " + answerStr);
+                    System.out.println(inputStr + "\tGET: " + getRegexResult(inputStr) + "\tBUT: " + answerStr);
                     throw new AssertionError();
                 }
             }
