@@ -1,5 +1,6 @@
 package utest;
 
+import org.junit.Assert;
 import org.junit.Test;
 import sheet.SpreadsheetReader;
 
@@ -14,7 +15,7 @@ public class SpreadsheetReaderTest {
         File []files = inputDir.listFiles();
         for (int fileIndex = 0; fileIndex < files.length; fileIndex++){
             SpreadsheetReader sr = new SpreadsheetReader(files[fileIndex].getAbsolutePath());
-            sr.checkCellType();
+            Assert.assertTrue(sr.checkCellType());
             //sr.printCellsInfo();
         }
     }
